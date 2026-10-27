@@ -55,41 +55,6 @@
     animated.forEach(function (el) { io.observe(el); });
   }
 
-  /* Vídeo: capa leve que vira o player do próprio site ao clicar ----------
-     O arquivo só é carregado quando alguém pede para assistir. */
-  document.querySelectorAll('.video-facade').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      var frame = link.parentNode;
-      var player = document.createElement('video');
-      player.src = link.dataset.src;
-      player.playsInline = true;
-      player.setAttribute('aria-hidden', 'true');
-
-      // Sem barra de controles: um clique no vídeo pausa ou retoma.
-      var toggle = document.createElement('button');
-      toggle.type = 'button';
-      toggle.className = 'video-toggle';
-      toggle.innerHTML = link.querySelector('.video-play').outerHTML;
-      var sync = function () {
-        var paused = player.paused || player.ended;
-        frame.classList.toggle('is-paused', paused);
-        toggle.setAttribute('aria-label', (paused ? 'Reproduzir: ' : 'Pausar: ') + link.dataset.title);
-      };
-      toggle.addEventListener('click', function () {
-        if (player.paused || player.ended) player.play(); else player.pause();
-      });
-      ['play', 'pause', 'ended'].forEach(function (ev) { player.addEventListener(ev, sync); });
-
-      link.replaceWith(player);
-      frame.appendChild(toggle);
-      sync();
-      toggle.focus();
-      var p = player.play();
-      if (p && p.catch) p.catch(sync);
-    });
-  });
-
   /* Formulários ----------------------------------------------------------- */
   var labelText = function (field) {
     var label = field.form.querySelector('label[for="' + field.id + '"]');
@@ -149,10 +114,10 @@
     err.hidden = !msg;
   };
 
-  // Pré-seleciona o serviço vindo das páginas de serviço (?servico=ITR)
-  var preset = new URLSearchParams(location.search).get('servico');
+  // Pré-seleciona a área vinda das páginas de solução (?area=rural)
+  var preset = new URLSearchParams(location.search).get('area');
   if (preset) {
-    document.querySelectorAll('input[name="servicos"]').forEach(function (cb) {
+    document.querySelectorAll('input[name="areas"]').forEach(function (cb) {
       if (cb.value === preset) cb.checked = true;
     });
   }

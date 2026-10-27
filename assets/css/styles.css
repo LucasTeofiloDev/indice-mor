@@ -949,3 +949,79 @@ fieldset.checks { border: 0; padding: 0; margin: 0; }
 .video-frame.is-paused .video-toggle .video-play { opacity: 1; }
 .video-toggle:hover .video-play { transform: translate(-50%, -50%) scale(1.08); }
 .video-toggle:focus-visible { outline: 3px solid var(--white); outline-offset: 4px; }
+
+/* Áreas de atuação: painel da abertura ---------------------------------- */
+.hero { padding-bottom: clamp(56px, 7vw, 96px); }
+.hero-areas {
+  position: relative;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.04);
+}
+.hero-areas::before,
+.hero-areas::after { content: ''; position: absolute; width: 38%; height: 42%; border: 0 solid var(--green-500); pointer-events: none; }
+.hero-areas::before { top: -14px; right: -14px; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 8px; }
+.hero-areas::after { bottom: -14px; left: -14px; border-bottom-width: 3px; border-left-width: 3px; border-bottom-left-radius: 8px; }
+.hero-areas-title { margin: 0 0 8px; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9fb1cc; }
+.hero-areas ol { list-style: none; }
+.hero-areas li + li { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.hero-areas a {
+  display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 14px; align-items: center;
+  padding: 14px 6px;
+  color: var(--white);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s;
+}
+.hero-areas a:hover { background: rgba(255, 255, 255, 0.06); }
+.ha-num { font-size: 0.8125rem; font-weight: 700; color: var(--green-500); }
+.ha-text { display: grid; gap: 2px; min-width: 0; }
+.ha-text strong { font-size: 1.0625rem; }
+.ha-text span { font-size: 0.84rem; color: #9fb1cc; line-height: 1.4; }
+.hero-areas .icon { color: var(--green-500); transition: transform 0.2s var(--ease); }
+.hero-areas a:hover .icon { transform: translateX(4px); }
+
+/* Áreas de atuação: cartões da página inicial --------------------------- */
+.area-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; list-style: none; }
+.area-card { grid-column: span 2; position: relative; display: flex; flex-direction: column; padding: 26px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); transition: border-color 0.2s, box-shadow 0.2s, transform 0.25s var(--ease); }
+.area-card:nth-child(4), .area-card:nth-child(5) { grid-column: span 3; }
+.area-card:hover { border-color: var(--blue-600); box-shadow: var(--shadow); transform: translateY(-2px); }
+.area-card:focus-within { border-color: var(--blue-600); }
+.area-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.area-num { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; color: var(--green-700); }
+.area-card h3 { font-size: 1.25rem; margin-bottom: 8px; }
+.area-card > p { color: var(--muted); font-size: 0.96875rem; }
+.area-items { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin-top: auto; padding-top: 6px; }
+.area-items li { padding: 4px 10px; border-radius: 999px; background: var(--blue-50); color: var(--navy-700); font-size: 0.8125rem; font-weight: 650; }
+
+/* Página "O que fazemos" ------------------------------------------------- */
+.area-index { position: sticky; top: 76px; z-index: 20; background: rgba(255, 255, 255, 0.96); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }
+.area-index ul { display: flex; gap: 4px; overflow-x: auto; list-style: none; scrollbar-width: none; }
+.area-index ul::-webkit-scrollbar { display: none; }
+.area-index a { display: inline-flex; align-items: center; gap: 8px; padding: 14px 12px; white-space: nowrap; color: var(--ink); font-weight: 600; font-size: 0.9375rem; text-decoration: none; }
+.area-index a span { color: var(--green-700); font-size: 0.8125rem; }
+.area-index a:hover { color: var(--blue-600); }
+.area { padding-block: clamp(56px, 7vw, 88px); scroll-margin-top: 140px; }
+.area-alt { background: var(--surface); }
+.area-grid { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+.area-head { position: sticky; top: 150px; }
+.area-head .area-num { display: block; margin-bottom: 10px; }
+.area-head h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+.area-head p { color: var(--muted); margin: 0; }
+.area .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.area .service-code { font-size: 1.3rem; }
+
+@media (max-width: 1150px) { .area-index { top: 68px; } }
+@media (max-width: 960px) {
+  .area-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .area-card, .area-card:nth-child(4), .area-card:nth-child(5) { grid-column: auto; }
+  .area-card:nth-child(5) { grid-column: 1 / -1; }
+  .area-grid { grid-template-columns: minmax(0, 1fr); }
+  .area-head { position: static; }
+}
+@media (max-width: 640px) {
+  .area-cards, .area .service-grid { grid-template-columns: minmax(0, 1fr); }
+  .area-card:nth-child(5) { grid-column: auto; }
+  .hero-areas::before, .hero-areas::after { display: none; }
+}
